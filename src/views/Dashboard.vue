@@ -46,6 +46,8 @@
         md="4"
       >
         <v-card>
+          // eslint-disable-next-line
+          /* eslint-disable */
           <v-card-text
             v-for="f in files"
             id="filenameTag"
@@ -69,13 +71,12 @@
 </template>
 
 <script>
-  import MaterialCard from '../components/material/Card'
+  /* import MaterialCard from '../components/material/Card' */
   import vue2Dropzone from 'vue2-dropzone'
   import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 
   export default {
     components: {
-      MaterialCard,
       vueDropzone: vue2Dropzone
     },
     data () {
@@ -262,7 +263,7 @@
         this.files.unshift({ name: file.name, status: file.status })
       },
       errorF (file, message, xhr) {
-        console.log(file, response)
+        console.log(file, message)
         this.files.unshift({ name: file.name, status: file.status })
       },
       onadd (file) {
