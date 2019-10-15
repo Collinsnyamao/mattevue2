@@ -11,25 +11,28 @@
             file upload
           </v-card-title>
           <v-card-text>
-
-
             <vue-dropzone
-              ref="myVueDropzone"
               id="dropzone"
+              ref="myVueDropzone"
               :options="dropzoneOptions"
               @vdropzone-complete="afterComplete"
               @vdropzone-success="successF"
               @vdropzone-error="errorF"
-
-            ></vue-dropzone>
+            />
             <v-row>
               <v-col offset="2">
-                <v-btn id="thisbtn" v-on:click="clicker">
+                <v-btn
+                  id="thisbtn"
+                  @click="clicker"
+                >
                   submit
                 </v-btn>
               </v-col>
               <v-col>
-                <v-btn id="clearbutton" v-on:click="clearDropzone">
+                <v-btn
+                  id="clearbutton"
+                  @click="clearDropzone"
+                >
                   Clear
                 </v-btn>
               </v-col>
@@ -43,16 +46,22 @@
         md="4"
       >
         <v-card>
-          <v-card-text id="filenameTag" v-for="f in files">
+          <v-card-text
+            v-for="f in files"
+            id="filenameTag"
+          >
             <v-list-item style="height: 20px;">
               <v-list-item-content>
-                <v-list-item-title v-model="f.name">{{ f.name }}</v-list-item-title>
-                <v-list-item-subtitle v-model="f.status">{{ f.status }}</v-list-item-subtitle>
+                <v-list-item-title v-model="f.name">
+                  {{ f.name }}
+                </v-list-item-title>
+                <v-list-item-subtitle v-model="f.status">
+                  {{ f.status }}
+                </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
-            <v-divider></v-divider>
+            <v-divider />
           </v-card-text>
-
         </v-card>
       </v-col>
     </v-row>
@@ -64,28 +73,27 @@
   import vue2Dropzone from 'vue2-dropzone'
   import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 
-
   export default {
     components: {
-        MaterialCard,
-        vueDropzone: vue2Dropzone
+      MaterialCard,
+      vueDropzone: vue2Dropzone
     },
     data () {
       return {
-          dropzoneOptions: {
-              url: 'http://127.0.0.1:3000/filecheck',
-              thumbnailWidth: 100,
-              thumbnailHeight:50,
-              maxFilesize: 1000,
-              headers: { "My-Awesome-Header": "header value" },
-              includeStyling: true,
-              duplicateCheck: true,
-              uploadMultiple: false,
-              retryChunks: true,
-              paramName: 'file',
-              autoProcessQueue: false,
-              acceptedFiles:'image/*,application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv,video/*'
-          },
+        dropzoneOptions: {
+          url: 'http://10.30.20.180:3000/filecheck',
+          thumbnailWidth: 100,
+          thumbnailHeight: 50,
+          maxFilesize: 1000,
+          headers: { 'My-Awesome-Header': 'header value' },
+          includeStyling: true,
+          duplicateCheck: true,
+          uploadMultiple: false,
+          retryChunks: true,
+          paramName: 'file',
+          autoProcessQueue: false,
+          acceptedFiles: 'image/*,application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv,video/*'
+        },
         dailySalesChart: {
           data: {
             labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
@@ -160,7 +168,7 @@
             }]
           ]
         },
-          files:[],
+        files: [],
         headers: [
           {
             sortable: false,
@@ -236,42 +244,38 @@
         }
       }
     },
+    mounted () {
+
+    },
     methods: {
       complete (index) {
         this.list[index] = !this.list[index]
       },
-        afterComplete(file) {
-            /*console.log(file);*/
-        },
+      afterComplete (file) {
+        /* console.log(file); */
+      },
       addComplete (filename) {
 
-
       },
-        successF(file,response){
-
-          console.log(file,response);
-          this.files.unshift({name:file.name,status:file.status});
-        },
-        errorF(file,message,xhr){
-
-            console.log(file,response);
-            this.files.unshift({name:file.name,status:file.status});
-        },
-        onadd(file){
-            document.getElementById('shower').innerText = 'sweet ' + file.filename;
-            console.log('added new file', file);
-        },
-        clicker (){
-          console.log('processing');
-          this.$refs.myVueDropzone.processQueue();
-        },
-        clearDropzone(){
-          this.$refs.myVueDropzone.removeAllFiles();
-        }
-    },
-      mounted () {
-
-
+      successF (file, response) {
+        console.log(file, response)
+        this.files.unshift({ name: file.name, status: file.status })
+      },
+      errorF (file, message, xhr) {
+        console.log(file, response)
+        this.files.unshift({ name: file.name, status: file.status })
+      },
+      onadd (file) {
+        document.getElementById('shower').innerText = 'sweet ' + file.filename
+        console.log('added new file', file)
+      },
+      clicker () {
+        console.log('processing')
+        this.$refs.myVueDropzone.processQueue()
+      },
+      clearDropzone () {
+        this.$refs.myVueDropzone.removeAllFiles()
       }
+    }
   }
 </script>
