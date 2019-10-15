@@ -46,8 +46,6 @@
         md="4"
       >
         <v-card>
-          // eslint-disable-next-line
-          /* eslint-disable */
           <v-card-text
             v-for="f in files"
             id="filenameTag"
