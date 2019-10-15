@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar
+  <!--<v-app-bar
     id="core-app-bar"
     absolute
     app
@@ -7,7 +7,7 @@
     flat
     height="88"
   >
-    <!--<v-toolbar-title class="tertiary&#45;&#45;text font-weight-light align-self-center">
+    &lt;!&ndash;<v-toolbar-title class="tertiary&#45;&#45;text font-weight-light align-self-center">
       <v-btn
         v-if="responsive"
         dark
@@ -17,7 +17,7 @@
         <v-icon>mdi-view-list</v-icon>
       </v-btn>
       {{ title }}
-    </v-toolbar-title>-->
+    </v-toolbar-title>&ndash;&gt;
     BigBlue Ingestion
 
     <v-spacer />
@@ -34,16 +34,16 @@
           hide-details
         />
 
-        <!--<v-btn
+        &lt;!&ndash;<v-btn
           icon
           to="/"
         >
           <v-icon color="tertiary">
             mdi-view-dashboard
           </v-icon>
-        </v-btn>-->
+        </v-btn>&ndash;&gt;
 
-        <!--<v-menu
+        &lt;!&ndash;<v-menu
           bottom
           left
           offset-y
@@ -82,7 +82,7 @@
               </v-list-item>
             </v-list>
           </v-card>&ndash;&gt;
-        </v-menu>-->
+        </v-menu>&ndash;&gt;
 
         <v-btn
           to="/user-profile"
@@ -94,7 +94,7 @@
         </v-btn>
       </v-row>
     </v-toolbar-items>
-  </v-app-bar>
+  </v-app-bar>-->
 </template>
 
 <script>

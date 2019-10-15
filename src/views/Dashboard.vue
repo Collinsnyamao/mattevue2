@@ -20,25 +20,29 @@
               @vdropzone-error="errorF"
             />
             <v-row>
-              <v-col offset="2">
+              <v-col cols="12" md="12">
                 <v-btn
                   id="thisbtn"
                   @click="clicker"
                 >
-                  submit
-                </v-btn>
-              </v-col>
-              <v-col>
-                <v-btn
-                  id="clearbutton"
-                  @click="clearDropzone"
-                >
-                  Clear
+                  Submit
                 </v-btn>
               </v-col>
             </v-row>
           </v-card-text>
         </v-card>
+        <v-snackbar
+          v-model="snackbar"
+        >
+          {{ text }}
+          <v-btn
+            color="pink"
+            text
+            @click="snackbar = false"
+          >
+            Close
+          </v-btn>
+        </v-snackbar>
       </v-col>
       <v-col
         cols="12"
@@ -74,13 +78,16 @@
   import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 
   export default {
+
     components: {
       vueDropzone: vue2Dropzone
     },
     data () {
       return {
+          snackbar: false,
+          text: 'Hello, I\'m a snackbar',
         dropzoneOptions: {
-          url: 'http://10.30.20.180:3000/filecheck',
+          url: 'http://127.0.0.1:3000/filecheck',
           thumbnailWidth: 100,
           thumbnailHeight: 50,
           maxFilesize: 1000,
@@ -258,7 +265,10 @@
       },
       successF (file, response) {
         console.log(file, response)
-        this.files.unshift({ name: file.name, status: file.status })
+        this.files.unshift({ name: file.name, status: file.status });
+        this.$refs.myVueDropzone.removeAllFiles();
+        this.snackbar = true;
+        this.text = response;
       },
       errorF (file, message, xhr) {
         console.log(file, message)
@@ -270,10 +280,10 @@
       },
       clicker () {
         console.log('processing')
-        this.$refs.myVueDropzone.processQueue()
+        this.$refs.myVueDropzone.processQueue();
       },
       clearDropzone () {
-        this.$refs.myVueDropzone.removeAllFiles()
+        this.$refs.myVueDropzone.removeAllFiles();
       }
     }
   }
