@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer
+  <!--<v-navigation-drawer
     id="app-drawer"
     v-model="inputValue"
     :src="image"
@@ -19,13 +19,13 @@
     </template>
 
     <v-list-item two-line>
-      <!--<v-list-item-avatar>
+      &lt;!&ndash;<v-list-item-avatar>
         <v-img
           src="https://cdn.vuetifyjs.com/images/logos/v.png"
           height="34"
           contain
         />
-      </v-list-item-avatar>-->
+      </v-list-item-avatar>&ndash;&gt;
 
       <v-list-item-title class="title">
         BigBlue
@@ -35,14 +35,14 @@
     <v-divider class="mx-3 mb-3" />
 
     <v-list nav>
-      <!-- Bug in Vuetify for first child of v-list not receiving proper border-radius -->
+      &lt;!&ndash; Bug in Vuetify for first child of v-list not receiving proper border-radius &ndash;&gt;
       <div />
 
       <v-list-item
         v-for="(link, i) in links"
         :key="i"
         :to="link.to"
-        active-class="primary white--text"
+        active-class="primary white&#45;&#45;text"
       >
         <v-list-item-action>
           <v-icon>{{ link.icon }}</v-icon>
@@ -52,7 +52,7 @@
       </v-list-item>
     </v-list>
 
-    <!--<template v-slot:append>
+    &lt;!&ndash;<template v-slot:append>
       <v-list nav>
         <v-list-item
           to="/upgrade"
@@ -66,8 +66,8 @@
           </v-list-item-title>
         </v-list-item>
       </v-list>
-    </template>-->
-  </v-navigation-drawer>
+    </template>&ndash;&gt;
+  </v-navigation-drawer>-->
 </template>
 
 <script>
@@ -91,11 +91,11 @@
           icon: 'mdi-view-dashboard',
           text: 'Dashboard'
         },
-        {
+        /*{
           to: '/user-profile',
           icon: 'mdi-account',
           text: 'User Profile'
-        }
+        }*/
       ]
     }),
 
