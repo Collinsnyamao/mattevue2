@@ -87,7 +87,7 @@
           snackbar: false,
           text: 'Hello, I\'m a snackbar',
         dropzoneOptions: {
-          url: 'http://10.30.20.180:3000/filecheck',
+          url: 'https://10.30.20.180:3002/filecheck',
           thumbnailWidth: 100,
           thumbnailHeight: 50,
           maxFilesize: 1000,
