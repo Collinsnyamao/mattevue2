@@ -24,6 +24,7 @@
                 <v-btn
                   id="thisbtn"
                   @click="clicker"
+                  style="text-transform: none !important;"
                 >
                   Submit
                 </v-btn>
@@ -52,13 +53,13 @@
         <v-card>
           <v-card-text>
             <v-row>
-              <v-col class="text-center">Uploaded Files</v-col>
-              <v-col class="text-right" ><v-col><v-btn text icon color="pink" v-on:click="clear(i)">
-                <v-icon style="margin-bottom: 10px;">mdi-autorenew</v-icon>
-              </v-btn></v-col></v-col>
+              <v-col class="text-left">Uploaded Files</v-col>
+              <v-col ><v-btn class="text-right" text color="pink" v-on:click="clear(i)" style="margin-left: 100px; margin-top: -10px; text-transform: none !important;">
+                <v-icon>mdi-autorenew</v-icon>Clear
+              </v-btn></v-col>
             </v-row>
           </v-card-text>
-          <v-card-text
+          <v-card-text style="margin-top: -10px;"
             v-for="(f,i) in files"
             id="filenameTag"
           >
