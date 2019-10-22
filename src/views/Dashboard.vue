@@ -53,7 +53,7 @@
         <v-card>
           <v-card-text>
             <v-row>
-              <v-col class="text-left">Uploaded Files</v-col>
+              <v-col class="text-left" style="font-weight: bold;">Uploaded Files</v-col>
               <v-col ><v-btn class="text-right" text color="pink" v-on:click="clear(i)" style="margin-left: 100px; margin-top: -10px; text-transform: none !important;">
                 <v-icon>mdi-autorenew</v-icon>Clear
               </v-btn></v-col>
