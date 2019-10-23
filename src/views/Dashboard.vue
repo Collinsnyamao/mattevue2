@@ -25,6 +25,7 @@
                   id="thisbtn"
                   @click="clicker"
                   style="text-transform: none !important;"
+                  color="blue"
                 >
                   Submit
                 </v-btn>
@@ -277,7 +278,7 @@
       successF (file, response) {
         console.log(file, response)
         this.files.unshift({ name: file.name, status: file.status });
-        this.$refs.myVueDropzone.removeAllFiles();
+        this.$refs.myVueDropzone.removeFile(file);
         this.snackbar = true;
         this.text = response;
       },
@@ -589,5 +590,8 @@
   }
   .dz-error-message:after{
     margin-right: 20px;
+  }
+  body{
+    background: white;
   }
 </style>
