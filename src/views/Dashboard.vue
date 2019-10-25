@@ -299,6 +299,7 @@
       },
         clear(i){
             this.files.splice(i);
+            this.$refs.myVueDropzone.removeAllFiles();
             let x = location.hostname;
         }
     }
