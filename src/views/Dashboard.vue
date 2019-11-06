@@ -2,9 +2,9 @@
   <v-container fluid>
     <v-row>
       <v-col
-        cols="12"
-        lg="8"
-        md="8"
+              cols="12"
+              lg="8"
+              md="8"
       >
         <v-card>
           <v-card-title>
@@ -12,20 +12,20 @@
           </v-card-title>
           <v-card-text>
             <vue-dropzone
-              id="dropzone"
-              ref="myVueDropzone"
-              :options="dropzoneOptions"
-              @vdropzone-complete="afterComplete"
-              @vdropzone-success="successF"
-              @vdropzone-error="errorF"
+                    id="dropzone"
+                    ref="myVueDropzone"
+                    :options="dropzoneOptions"
+                    @vdropzone-complete="afterComplete"
+                    @vdropzone-success="successF"
+                    @vdropzone-error="errorF"
             />
             <v-row>
               <v-col cols="12" md="12">
                 <v-btn
-                  id="thisbtn"
-                  @click="clicker"
-                  style="text-transform: none !important;"
-                  color="blue"
+                        id="thisbtn"
+                        @click="clicker"
+                        style="text-transform: none !important;"
+                        color="blue"
                 >
                   Submit
                 </v-btn>
@@ -34,22 +34,22 @@
           </v-card-text>
         </v-card>
         <v-snackbar
-          v-model="snackbar"
+                v-model="snackbar"
         >
           {{ text }}
           <v-btn
-            color="blue"
-            text
-            @click="snackbar = false"
+                  color="blue"
+                  text
+                  @click="snackbar = false"
           >
             Close
           </v-btn>
         </v-snackbar>
       </v-col>
       <v-col
-        cols="12"
-        lg="4"
-        md="4"
+              cols="12"
+              lg="4"
+              md="4"
       >
         <v-card>
           <v-card-text>
@@ -61,8 +61,8 @@
             </v-row>
           </v-card-text>
           <v-card-text style="margin-top: -10px;"
-            v-for="(f,i) in files"
-            id="filenameTag"
+                       v-for="(f,i) in files"
+                       id="filenameTag"
           >
             <v-list-item style="height: 20px;">
               <v-list-item-content>
@@ -71,6 +71,14 @@
                 </v-list-item-title>
                 <v-list-item-subtitle v-model="f.status">
                   {{ f.status }}
+
+                  <v-progress-linear
+                          :active="f.response"
+                          :indeterminate="f.response"
+                          absolute
+                          bottom
+                          color="deep-purple accent-4"
+                  ></v-progress-linear>
                 </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
@@ -95,29 +103,31 @@
     },
     data () {
       return {
-          snackbar: false,
-          text: 'Hello, I\'m a snackbar',
-          dropzoneOptions: {
-              url: 'https://10.30.20.180:3002/filecheck',
-              thumbnailWidth: 150,
-              thumbnailHeight: 50,
-              maxFilesize: 1000,
-              headers: { 'My-Awesome-Header': 'header value' },
-              includeStyling: false,
-              duplicateCheck: false,
-              uploadMultiple: false,
-              retryChunks: true,
-              paramName: 'file',
-              autoProcessQueue: false,
-              acceptedFiles: 'image/*,application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv,video/*',
-              createImageThumbnails: false
-          },
-          dailySalesChart: {
-              data: {
-                  labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-                  series: [
-                      [12, 17, 7, 17, 23, 18, 38]
-                  ]
+
+        loading: true,
+        snackbar: false,
+        text: 'Hello, I\'m a snackbar',
+        dropzoneOptions: {
+          url: 'https://10.30.20.180:3002/filecheck',
+          thumbnailWidth: 150,
+          thumbnailHeight: 50,
+          maxFilesize: 1000,
+          headers: { 'My-Awesome-Header': 'header value' },
+          includeStyling: false,
+          duplicateCheck: false,
+          uploadMultiple: false,
+          retryChunks: true,
+          paramName: 'file',
+          autoProcessQueue: false,
+          acceptedFiles: 'image/*,application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv,video/*',
+          createImageThumbnails: false
+        },
+        dailySalesChart: {
+          data: {
+            labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+            series: [
+              [12, 17, 7, 17, 23, 18, 38]
+            ]
           },
           options: {
             lineSmooth: this.$chartist.Interpolation.cardinal({
@@ -263,7 +273,6 @@
       }
     },
     mounted () {
-
     },
     methods: {
       complete (index) {
@@ -276,33 +285,47 @@
 
       },
       successF (file, response) {
-        console.log(file, response)
-        this.files.unshift({ name: file.name, status: file.status });
+        console.log(file, response);
+        if (response === 'true'){
+          this.files.unshift({ name: file.name, status: file.status +' * awaiting ingestion *', response: true });
+          this.snackbar = true;
+          this.text = 'File submitted for ingestion';
+        }else if (response === 'false'){
+          this.files.unshift({ name: file.name, status: file.status + ' * already exists *', response: false });
+          this.snackbar = true;
+          this.text = 'File already exists.';
+        }
         this.$refs.myVueDropzone.removeFile(file);
-        this.snackbar = true;
-        this.text = response;
+
       },
       errorF (file, message, xhr) {
-        console.log(file, message)
-        this.files.unshift({ name: file.name, status: file.status })
+        console.log(file, message);
+        this.files.unshift({ name: file.name, status: file.status , response: '0' })
       },
       onadd (file) {
-        document.getElementById('shower').innerText = 'sweet ' + file.filename
+        document.getElementById('shower').innerText = 'sweet ' + file.filename;
         console.log('added new file', file)
       },
       clicker () {
-        console.log('processing')
+        console.log('processing');
         this.$refs.myVueDropzone.processQueue();
       },
       clearDropzone () {
         this.$refs.myVueDropzone.removeAllFiles();
       },
-        clear(i){
-            this.files.splice(i);
-            this.$refs.myVueDropzone.removeAllFiles();
-            let x = location.hostname;
-        }
-    }
+      clear(i){
+        this.files.splice(i);
+        this.$refs.myVueDropzone.removeAllFiles();
+        let x = location.hostname;
+      }
+    },
+    watch: {
+      loading (val) {
+        if (!val) return;
+
+        setTimeout(() => (this.loading = false), 3000)
+      },
+    },
   }
 </script>
 <style>
