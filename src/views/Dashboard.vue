@@ -94,12 +94,17 @@
   /* import MaterialCard from '../components/material/Card' */
   import vue2Dropzone from 'vue2-dropzone'
   import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+  import axios from 'axios'
+  import VueAxios from 'vue-axios'
   import { mdiAutorenew } from '@mdi/js';
+  import {set} from "../utils/vuex";
 
   export default {
 
     components: {
-      vueDropzone: vue2Dropzone
+      vueDropzone: vue2Dropzone,
+        VueAxios,
+        axios
     },
     data () {
       return {
@@ -108,7 +113,7 @@
         snackbar: false,
         text: 'Hello, I\'m a snackbar',
         dropzoneOptions: {
-          url: 'https://10.30.20.180:3002/filecheck',
+          url: 'https://10.30.20.133:3002/filecheck',
           thumbnailWidth: 150,
           thumbnailHeight: 50,
           maxFilesize: 1000,
@@ -286,14 +291,21 @@
       },
       successF (file, response) {
         console.log(file, response);
-        if (response === 'true'){
+        let oFileName = file.name;
+        if (response.status === 'true'){
           this.files.unshift({ name: file.name, status: file.status +' * awaiting ingestion *', response: true });
           this.snackbar = true;
           this.text = 'File submitted for ingestion';
-        }else if (response === 'false'){
+          console.log('true');
+
+          this.checkStatus(response.filename, oFileName);
+            console.log('checking ' , oFileName);
+        }else if (response.status === 'false'){
           this.files.unshift({ name: file.name, status: file.status + ' * already exists *', response: false });
           this.snackbar = true;
           this.text = 'File already exists.';
+            this.checkStatus(response.filename,oFileName);
+            console.log('checking ' , oFileName);
         }
         this.$refs.myVueDropzone.removeFile(file);
 
@@ -317,7 +329,42 @@
         this.files.splice(i);
         this.$refs.myVueDropzone.removeAllFiles();
         let x = location.hostname;
-      }
+      },
+        checkStatus(filename,originalfilename) {
+          let self = this;
+            axios.post('https://10.30.20.133:3002/ingested/checkstatus', {
+                filename: filename
+            })
+                .then(function (response) {
+                    console.log(response);
+
+                    if (response.data === null){
+                        setTimeout(function () {
+                            self.checkStatus(filename);
+                        },1000);
+                    }else {
+                        let status = response.data.status;
+                        console.log('found handler: ' + status);
+                        if (response.data.status === 'true'){
+                            console.log('passed if : ', true);
+                            for(let i=0; i < self.files.length+1; i++){
+                                console.log('in loop ', originalfilename);
+                                if( self.files[i].name === originalfilename){
+
+                                    console.log('passed second loop');
+                                    self.files[i].response = false;
+                                    console.log('found handler ' + self.files[i].name);
+                                }
+                            }
+                        }
+                    }
+
+
+                })
+                .catch(function (error) {
+                    console.log(error)
+                });
+        }
     },
     watch: {
       loading (val) {

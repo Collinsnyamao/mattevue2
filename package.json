@@ -16,6 +16,7 @@
     "core-js": "^2.6.5",
     "vue": "^2.6.10",
     "vue-analytics": "^5.17.0",
+    "vue-axios": "^2.1.5",
     "vue-chartist": "^2.2.1",
     "vue-fineuploader": "^2.0.0-rc.9",
     "vue-meta": "^2.2.1",
