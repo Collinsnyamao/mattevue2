@@ -300,11 +300,12 @@
 
           this.checkStatus(response.filename, oFileName);
             console.log('checking ' , oFileName);
+            console.log('checkingddddddddddddddddddddd ' ,oFileName);
         }else if (response.status === 'false'){
           this.files.unshift({ name: file.name, status: file.status + ' * already exists *', response: false });
           this.snackbar = true;
           this.text = 'File already exists.';
-            this.checkStatus(response.filename,oFileName);
+            this.checkStatus(response.filename, oFileName);
             console.log('checking ' , oFileName);
         }
         this.$refs.myVueDropzone.removeFile(file);
@@ -331,6 +332,7 @@
         let x = location.hostname;
       },
         checkStatus(filename,originalfilename) {
+
           let self = this;
             axios.post('https://10.30.20.133:3002/ingested/checkstatus', {
                 filename: filename
@@ -340,19 +342,22 @@
 
                     if (response.data === null){
                         setTimeout(function () {
-                            self.checkStatus(filename);
+                            console.log('ch ' , originalfilename);
+                            self.checkStatus(filename,originalfilename);
                         },1000);
                     }else {
                         let status = response.data.status;
-                        console.log('found handler: ' + status);
+                        console.log('found handler 2 : ' + status);
                         if (response.data.status === 'true'){
                             console.log('passed if : ', true);
-                            for(let i=0; i < self.files.length+1; i++){
+                            for(let i=0; i < self.files.length; i++){
                                 console.log('in loop ', originalfilename);
+                                console.log(self.files);
                                 if( self.files[i].name === originalfilename){
 
                                     console.log('passed second loop');
                                     self.files[i].response = false;
+                                    self.files[i].status = 'Completed Ingesting.';
                                     console.log('found handler ' + self.files[i].name);
                                 }
                             }
