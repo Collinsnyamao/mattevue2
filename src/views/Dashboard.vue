@@ -113,7 +113,7 @@
         snackbar: false,
         text: 'Hello, I\'m a snackbar',
         dropzoneOptions: {
-          url: 'https://10.30.20.133:3002/filecheck',
+          url: 'https://10.30.20.180:3002/filecheck',
           thumbnailWidth: 150,
           thumbnailHeight: 50,
           maxFilesize: 1000,
@@ -334,7 +334,7 @@
         checkStatus(filename,originalfilename) {
 
           let self = this;
-            axios.post('https://10.30.20.133:3002/ingested/checkstatus', {
+            axios.post('https://10.30.20.180:3002/ingested/checkstatus', {
                 filename: filename
             })
                 .then(function (response) {
