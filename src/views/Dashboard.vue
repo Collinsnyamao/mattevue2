@@ -18,9 +18,14 @@
                     @vdropzone-complete="afterComplete"
                     @vdropzone-success="successF"
                     @vdropzone-error="errorF"
+                    :useCustomSlot=true
             />
+            <div class="dropzone-custom-content">
+              <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
+              <div class="subtitle">...or click to select a file from your computer</div>
+            </div>
             <v-row>
-              <v-col cols="12" md="12">
+              <!--<v-col cols="12" md="12">
                 <v-btn
                         id="thisbtn"
                         @click="clicker"
@@ -29,7 +34,7 @@
                 >
                   Submit
                 </v-btn>
-              </v-col>
+              </v-col>-->
             </v-row>
           </v-card-text>
         </v-card>
@@ -116,14 +121,15 @@
           url: 'https://10.30.20.180:3002/filecheck',
           thumbnailWidth: 150,
           thumbnailHeight: 50,
+          addRemoveLinks: false,
           maxFilesize: 1000,
-          headers: { 'My-Awesome-Header': 'header value' },
+          headers: false,
           includeStyling: false,
           duplicateCheck: false,
           uploadMultiple: false,
           retryChunks: true,
           paramName: 'file',
-          autoProcessQueue: false,
+          autoProcessQueue: true,
           acceptedFiles: 'image/*,application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv,video/*',
           createImageThumbnails: false
         },
@@ -293,16 +299,16 @@
         console.log(file, response);
         let oFileName = file.name;
         if (response.status === 'true'){
-          this.files.unshift({ name: file.name, status: file.status +' * awaiting ingestion *', response: true });
+          this.files.unshift({ name: file.name, status: 'Upload complete...' +' Ingestion ongoing!', response: true });
           this.snackbar = true;
           this.text = 'File submitted for ingestion';
           console.log('true');
 
           this.checkStatus(response.filename, oFileName);
             console.log('checking ' , oFileName);
-            console.log('checkingddddddddddddddddddddd ' ,oFileName);
+            console.log('checking ' ,oFileName);
         }else if (response.status === 'false'){
-          this.files.unshift({ name: file.name, status: file.status + ' * already exists *', response: false });
+          this.files.unshift({ name: file.name, status: file.status + ' already exists ', response: false });
           this.snackbar = true;
           this.text = 'File already exists.';
             this.checkStatus(response.filename, oFileName);
@@ -357,7 +363,7 @@
 
                                     console.log('passed second loop');
                                     self.files[i].response = false;
-                                    self.files[i].status = 'Completed Ingesting.';
+                                    self.files[i].status = 'Ingestion completed.';
                                     console.log('found handler ' + self.files[i].name);
                                 }
                             }
@@ -381,6 +387,28 @@
   }
 </script>
 <style>
+  .dropzone-custom-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .dropzone-custom-title {
+    margin-top: 0;
+    color: #00b782;
+  }
+
+  .subtitle {
+    color: #314b5f;
+  }
+
+
+
+
+
+
   .container{
     margin: 0 auto;
     width: 100%;
@@ -397,6 +425,7 @@
   .dz-message{
     text-align: center;
     font-size: 28px;
+    opacity: 0;
   }
   .dz-details{
     background-color: aqua;
