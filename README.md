@@ -19,36 +19,42 @@ This is a  Vue ~ node.js  ingestion application powered by VueMatte, NodeJs + Ex
 - Other awesome features yet to be implemented
 
 .
-![User Features](http://i.imgur.com/WbF1fi2.png)
+![User Features](/src/s1.jpg)
 
 .
-![Admin Features](http://i.imgur.com/xQFaadt.png)
+![Admin Features](https://imgur.com/9uo6s3z)
 
 
-#### There are 3 admin levels:
-- **Helper:** Can delete chat messages
-- **Moderator:** The above plus the ability to kick and ban users
-- **Administrator:** All the above plus send global alerts and promote/demote users
+#### There are 2 levels:
+- **Vue UI:** Can delete chat messages
+- **Node processor:** The above plus the ability to kick and ban users
+
+---
+
+#### Requirements:
+- **Mongo:** For storage
+- **NodeJs:** npm/Yarn
 
 ---
 
 ## Setup
-Clone this repo to your desktop and run `npm install` to install all the dependencies.
 
-You might want to look into `config.json` to make change the port you want to use and set up a SSL certificate.
+Run mongo as sudo
+Clone [this](https://git.jetbrains.space/blueray/NodeJS-ingestion.git) repo to your machine
+
+Clone the [nodes-P](https://git.jetbrains.space/blueray/NodeJS-ingestion.git) repo to your machine
+
 
 ---
 
 ## Usage
 After you clone this repo to your desktop, go to its root directory and run `npm install` to install its dependencies.
 
-Once the dependencies are installed, you can run  `npm start` to start the application. You will then be able to access it at localhost:3000
-
-To give yourself administrator permissions on the chat, you will have to type `/role [your-name]` in the app console.
+Once the dependencies are installed, you can run  `npm start` for nodes-P and npm run serve for IngestionDashboard to start the application. You will then be able to access it at localhost:3000
 
 ---
 
 ## License
->You can check out the full license [here](https://github.com/IgorAntun/node-chat/blob/master/LICENSE)
+>You can check out the full license [here]()
 
 This project is licensed under the terms of the **MIT** license.
