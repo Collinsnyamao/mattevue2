@@ -4,8 +4,6 @@ Ingestion Dashboard
 
 This is a  Vue ~ node.js  ingestion application powered by VueMatte, NodeJs + Express that provides the main functions you'd expect such as upload, error reporting, an admin system, file sorting, back ups, checksum checking etc.
 
-![Chat Preview](http://i.imgur.com/lgRe8z4.png)
-
 ---
 
 ## Features
