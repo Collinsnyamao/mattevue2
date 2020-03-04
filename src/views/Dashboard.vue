@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container fluid style="margin-left: 20px;">
     <v-row>
       <v-col
               cols="12"
@@ -7,8 +7,11 @@
               md="8"
       >
         <v-card>
-          <v-card-title>
-            File Upload
+          <v-card-title style="height: 50px; margin-bottom: 10px;">
+            <v-col class="text-left">File upload</v-col>
+            <v-col class="text-right" ><v-btn class="text-right" text color="red" style="margin-left: 100px; margin-top: -10px; text-transform: none !important;" v-on:click="cleardb()">
+              <v-icon>mdi-history</v-icon>Clear
+              </v-btn></v-col>
           </v-card-title>
           <v-card-text>
             <vue-dropzone
@@ -22,7 +25,7 @@
             />
             <div class="dropzone-custom-content">
               <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
-              <div class="subtitle">...or click to select a file from your computer</div>
+              <div class="subtitle">or click to select a file from your computer.</div>
             </div>
             <v-row>
               <!--<v-col cols="12" md="12">
@@ -56,7 +59,7 @@
               lg="4"
               md="4"
       >
-        <v-card>
+        <v-card style="margin-right: 20px;">
           <v-card-text>
             <v-row>
               <v-col class="text-left" style="font-weight: bold;">Uploaded Files</v-col>
@@ -114,6 +117,8 @@
     data () {
       return {
 
+        postBody: '',
+        errors: [],
         loading: true,
         snackbar: false,
         text: 'Hello, I\'m a snackbar',
@@ -299,7 +304,7 @@
         console.log(file, response);
         let oFileName = file.name;
         if (response.status === 'true'){
-          this.files.unshift({ name: file.name, status: 'Upload complete...' +' Ingestion ongoing!', response: true });
+          this.files.unshift({ name: file.name, status: 'Upload complete, ' +' Ingestion ongoing!', response: true });
           this.snackbar = true;
           this.text = 'File submitted for ingestion';
           console.log('true');
@@ -308,7 +313,7 @@
             console.log('checking ' , oFileName);
             console.log('checking ' ,oFileName);
         }else if (response.status === 'false'){
-          this.files.unshift({ name: file.name, status: file.status + ' already exists ', response: false });
+          this.files.unshift({ name: file.name, status: file.status + ': This file already exists.', response: false });
           this.snackbar = true;
           this.text = 'File already exists.';
             this.checkStatus(response.filename, oFileName);
@@ -324,6 +329,20 @@
       onadd (file) {
         document.getElementById('shower').innerText = 'sweet ' + file.filename;
         console.log('added new file', file)
+      },
+      cleardb(){
+        axios.post('https://10.30.20.87:3002/cleardb/checksum', {
+          password: 'tintin'
+        })
+                .then(response => {
+                  this.snackbar = true;
+                  this.text = response.statusText + ' : '  + response.data;
+                })
+                .catch(e => {
+                  this.errors.push(e)
+                  this.snackbar = true;
+                  this.text = e;
+                })
       },
       clicker () {
         console.log('processing');

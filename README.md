@@ -42,6 +42,36 @@ Clone [this](https://git.jetbrains.space/blueray/NodeJS-ingestion.git) repo to y
 
 Clone the [nodes-P](https://git.jetbrains.space/blueray/NodeJS-ingestion.git) repo to your machine
 
+1. start the mongo db daemon as sudo
+
+```
+sudo mongod
+```
+
+2. install dependencies in both repositories by running
+
+```
+npm install
+```
+
+on both directories
+
+3. run both services
+
+for the vue ingestion dashboard run: 
+```
+npm run serve
+```
+
+for the node ingestion directory
+
+```
+npm run start.
+```
+the outcome should be as follows.
+<img src='123.png'/>
+
+the last three lines are the express http server connection, the file system connection and mongodb database connection respectively
 
 ---
 
