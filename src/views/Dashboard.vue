@@ -7,9 +7,9 @@
               md="8"
       >
         <v-card>
-          <v-card-title style="height: 50px; margin-bottom: 10px;">
-            <v-col class="text-left">File upload</v-col>
-            <v-col class="text-right" ><v-btn class="text-right" text color="red" style="margin-left: 100px; margin-top: -10px; text-transform: none !important;" v-on:click="cleardb()">
+          <v-card-title style="height: 50px; margin-bottom: 15px;">
+            <v-col class="text-left" style="color: #444444;">File upload</v-col>
+            <v-col class="text-right" ><v-btn class="text-right" text color="#407ec1" style="margin-left: 100px; margin-top: -10px; text-transform: none !important;" v-on:click="cleardb()">
               <v-icon>mdi-history</v-icon>Clear
               </v-btn></v-col>
           </v-card-title>
@@ -25,7 +25,7 @@
             />
             <div class="dropzone-custom-content">
               <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
-              <div class="subtitle">or click to select a file from your computer.</div>
+              <div class="subtitle">or click to select a file from your computer</div>
             </div>
             <v-row>
               <!--<v-col cols="12" md="12">
@@ -62,8 +62,8 @@
         <v-card style="margin-right: 20px;">
           <v-card-text>
             <v-row>
-              <v-col class="text-left" style="font-weight: bold;">Uploaded Files</v-col>
-              <v-col ><v-btn class="text-right" text color="blue" v-on:click="clear(i)" style="margin-left: 100px; margin-top: -10px; text-transform: none !important;">
+              <v-col class="text-left" style="font-weight: bold;">Uploaded files</v-col>
+              <v-col ><v-btn class="text-right" text color="#407ec1" v-on:click="clear(i)" style="margin-left: 100px; margin-top: -10px; text-transform: none !important;">
                 <v-icon>mdi-autorenew</v-icon>Clear
               </v-btn></v-col>
             </v-row>
@@ -74,7 +74,7 @@
           >
             <v-list-item style="height: 20px;">
               <v-list-item-content>
-                <v-list-item-title v-model="f.name">
+                <v-list-item-title v-model="f.name" style="color: #444444">
                   {{ f.name }}
                 </v-list-item-title>
                 <v-list-item-subtitle v-model="f.status">
@@ -85,7 +85,7 @@
                           :indeterminate="f.response"
                           absolute
                           bottom
-                          color="deep-purple accent-4"
+                          color="#407ec1"
                   ></v-progress-linear>
                 </v-list-item-subtitle>
               </v-list-item-content>
@@ -99,6 +99,7 @@
 </template>
 
 <script>
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
   /* import MaterialCard from '../components/material/Card' */
   import vue2Dropzone from 'vue2-dropzone'
   import 'vue2-dropzone/dist/vue2Dropzone.min.css'
@@ -123,20 +124,20 @@
         snackbar: false,
         text: 'Hello, I\'m a snackbar',
         dropzoneOptions: {
-          url: 'https://10.30.20.87:3002/filecheck',
+          url: 'https://10.30.20.89:3002/filecheck',
           thumbnailWidth: 150,
           thumbnailHeight: 50,
           addRemoveLinks: false,
           maxFilesize: 1000,
           headers: false,
-          includeStyling: false,
+          includeStyling: true,
           duplicateCheck: false,
           uploadMultiple: false,
           retryChunks: true,
           paramName: 'file',
           autoProcessQueue: true,
-          acceptedFiles: 'image/*,application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv,video/*',
-          createImageThumbnails: false
+          acceptedFiles: 'application/sql,image/*,application/pdf,application/*,application/octet-stream,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv,video/*,application/sql,application/x-compressed,application/x-gzip,multipart/x-gzip,application/x-gzip,application/eot',
+          createImageThumbnails: true
         },
         dailySalesChart: {
           data: {
@@ -331,7 +332,7 @@
         console.log('added new file', file)
       },
       cleardb(){
-        axios.post('https://10.30.20.87:3002/cleardb/checksum', {
+        axios.post('https://10.30.20.89:3002/cleardb/checksum', {
           password: 'tintin'
         })
                 .then(response => {
@@ -359,7 +360,7 @@
         checkStatus(filename,originalfilename) {
 
           let self = this;
-            axios.post('https://10.30.20.87:3002/ingested/checkstatus', {
+            axios.post('https://10.30.20.89:3002/ingested/checkstatus', {
                 filename: filename
             })
                 .then(function (response) {
@@ -416,7 +417,7 @@
 
   .dropzone-custom-title {
     margin-top: 0;
-    color: #00b782;
+    color: #407ec1;
   }
 
   .subtitle {

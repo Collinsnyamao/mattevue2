@@ -68,9 +68,6 @@ for the node ingestion directory
 ```
 npm run start.
 ```
-the outcome should be as follows.
-
-![Image of success](/home/bigblue-dev/dashboard/final/IngestionDashboard/images/123.png)
 
 the last three lines are the express http server connection, the file system connection and mongodb database connection respectively
 
