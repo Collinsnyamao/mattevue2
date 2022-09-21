@@ -10481,6 +10481,11 @@ vue-analytics@^5.17.0:
   resolved "https://registry.yarnpkg.com/vue-analytics/-/vue-analytics-5.17.0.tgz#c9530b82b9b4acd111c9cba7d249adf4089746b3"
   integrity sha512-1Cn/v06cGjmGDfRlG2hc0RF0sc2rNC88shOeLGNIlllSFv5GDZ9kLXGTPB9z9I+WyvFewyUONPIdQnpOls6h6w==
 
+vue-axios@^2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/vue-axios/-/vue-axios-2.1.5.tgz#1af4bf1218ed71309c76afb38d0f683e312c24a7"
+  integrity sha512-th5xVbInVoyIoe+qY+9GCflEVezxAvztD4xpFF39SRQYqpoKD2qkmX8yv08jJG9a2SgNOCjirjJGSwg/wTrbmA==
+
 vue-chartist@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/vue-chartist/-/vue-chartist-2.2.1.tgz#c110f06c252467c5682634265abab543fb9c730f"
@@ -10625,10 +10630,10 @@ vuetify-toast-snackbar@^0.6.1:
   resolved "https://registry.yarnpkg.com/vuetify-toast-snackbar/-/vuetify-toast-snackbar-0.6.1.tgz#a90d93c5b1aae3411d7d297f5ee00934fa6952dc"
   integrity sha512-F2bLPMXiw7qQgX68adSu0zQrMTKODN5JAzCP8AP/HGhz/Bz1z24QbvYcX0fyHnG/yP6PAPkpMCXsLQSq6HV0Ag==
 
-vuetify@^2.0.0:
-  version "2.0.7"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.0.7.tgz#a5985aca904c147e2febe4ca14e9c7ed26c4f011"
-  integrity sha512-dnW6VowHOXaq6cxYjn6RXcTWVCJnWh3ajh4e4pP84grb4Smebka6yUQSG8rSalPyFzkPeNGuXrXWVsbTAIqv7w==
+vuetify@^2.6.10:
+  version "2.6.10"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.6.10.tgz#b86cd7a97bf8cd3828a72c349795b5b3c539ebc2"
+  integrity sha512-fgUeRDDCwYkwu6WGEEKGe7IdfzOsXJCZGrqkn1pcS2ycuoDL8mR2/dejH5iFNnBY6MnsT365PAGn0J+9otjfQg==
 
 vuex-router-sync@^5.0.0:
   version "5.0.0"
